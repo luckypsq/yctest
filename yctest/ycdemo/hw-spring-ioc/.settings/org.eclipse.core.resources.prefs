@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+<<<<<<< HEAD
+encoding//src/main/resources=UTF-8
+encoding//src/test/java=UTF-8
+=======
+encoding//src/main/java/com/yc/favorite/biz/FavoriteBiz.java=UTF-8
+encoding//src/main/java/com/yc/favorite/dao/TagMapper.java=UTF-8
+encoding//src/main/java/com/yc/favorite/util/MyBatisHelper.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/edit.jsp=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/test/java=UTF-8
+encoding//src/test/java/com/yc/favorite/dao/TagMapperTest.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/luckypsq/Ycdemo.git
+encoding//src/test/resources=UTF-8
+encoding/<project>=UTF-8
