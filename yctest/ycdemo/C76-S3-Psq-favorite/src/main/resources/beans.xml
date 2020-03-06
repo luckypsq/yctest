@@ -7,6 +7,7 @@
     http://www.springframework.org/schema/context
      http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- 数据库配置 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!-- 1.1.数据库驱动 -->
@@ -19,7 +20,7 @@
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 
-	<!-- 读入属性文件 -->
+	<!-- 读入jdbc属性文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<!-- spring 整合mybatis的bean -->
 	<!--为mybatis的sqlSessionFactory注入数据源 -->
@@ -35,7 +36,7 @@
 		</property>
 	</bean>
 
-
+	<!-- springMVC配置 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:default-servlet-handler>
 	</mvc:default-servlet-handler>
@@ -48,9 +49,18 @@
 		<!-- 后缀 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<!--上面配置了mapper文件的位置，我们之前创建dao对象时，使用sqlSession的getMapper(dao.class)来创建对象 
-		那么使用spring来创建对象，spring如何找到dao接口的位置呢？ -->
+	<!-- mybatis 接口扫包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.yc.favorite.dao" />
 	</bean>
+
+	<!-- Spring IOC 配置 -->
+	<context:component-scan base-package="com.yc.favorite"></context:component-scan>
+
+	<!-- Spring 事务管理 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
 </beans>

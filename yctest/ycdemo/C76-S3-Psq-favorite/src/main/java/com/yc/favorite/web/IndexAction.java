@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yc.favorite.bean.Favorite;
 import com.yc.favorite.bean.Tag;
+import com.yc.favorite.biz.FavoriteBiz;
 import com.yc.favorite.dao.FavoriteMapper;
 import com.yc.favorite.dao.TagMapper;
 
@@ -20,6 +22,8 @@ public class IndexAction {
 	private TagMapper tm;
 	@Autowired
 	private FavoriteMapper fm;
+	
+	FavoriteBiz fBiz = new FavoriteBiz();
 	
 	@GetMapping("index.s")
 	public String index(String tId,String flag, Model m) {
@@ -39,5 +43,21 @@ public class IndexAction {
 		}
 		m.addAttribute("tList",list);
 		return "index";
+	}
+	@RequestMapping("saveFavorite.s")
+	public String addFavorite(Favorite f,Model m){
+		try {
+			fBiz.addFavorite(f);
+			//响应重定向
+			return "redirect:index.s";
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute("msg", "添加失败");
+			return "edit";
+		}
+	}
+	@RequestMapping("toedit")
+	public String toEdit(){
+		return "edit";
 	}
 }
