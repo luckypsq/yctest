@@ -60,6 +60,7 @@ class C76S3PlySpringBootApplicationTests {
 		
 		/**
 		 * 行为验证
+		 * 测试
 		 */
 		Mockito.verify(um).selectByNameAndPassWord("yc", "123");
 		Mockito.verify(um).selectByNameAndPassWord("zhangsan", "123");
