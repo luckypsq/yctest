@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var websocket;
+		function conn(){
+			//创建对象
+			 websocket = new WebSocket("ws://localhost/websocket/" + manid.value);
+			
+			//链接错误回调方法
+			websocket.onerror = function(){};
+			
+			//链接成功回调方法
+			websocket.onopen = function(event){
+				console.info(event);
+			};
+			//接受信息回调方法
+			websocket.onmessage = function(event){
+				console.info(event);
+				console.info(event.currentTarget);
+				msgtxt.innerText +=event.data + "\n";
+			};
+			
+			//链接关闭回调方法
+			websocket.onclose = function(){};
+			
+			//关闭链接
+			function closeWebSocket(){
+				websocket.close();
+			};
+			//发送信息
+			function send(msg){
+				websocket.send(msg);
+			};
+		}
+	
+	</script>
+	聊天人：<input id="manid"><br>
+	<button onclick="conn()">链接</button><br>
+	消息区：<textarea id="msgtxt"rows="10" cols=""></textarea><br>
+	我说：<input id="msgid">
+	<button onclick="send(msgid.value)">发送</button><br>
+	
+</body>
+</html>

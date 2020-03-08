@@ -4,6 +4,8 @@ package com.yc.C76S3PlySpringBoot;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
  * SpringBoot工程启动类
@@ -28,5 +30,8 @@ public class C76S3PlySpringBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(C76S3PlySpringBootApplication.class, args);
 	}
-
+	@Bean
+	public ServerEndpointExporter serverEndpointExporter() {
+		return new ServerEndpointExporter();
+	}
 }
