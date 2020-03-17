@@ -8,6 +8,7 @@ public class Result {
 		// 返回的数据
 		private Object data;
 		
+		
 		public Result() {
 			super();
 		}
@@ -116,6 +117,7 @@ public class Result {
 		public Object getData() {
 			return data;
 		}
+
 		public void setData(Object data) {
 			this.data = data;
 		}

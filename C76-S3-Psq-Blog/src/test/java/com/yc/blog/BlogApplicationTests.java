@@ -13,6 +13,7 @@ import com.yc.blog.bean.ArticleExample;
 import com.yc.blog.bean.ArticleExample.Criteria;
 import com.yc.blog.dao.ArticleMapper;
 import com.yc.blog.dao.UserMapper;
+import com.yc.blog.vo.MailService;
 
 @SpringBootTest
 class BlogApplicationTests {
@@ -22,6 +23,9 @@ class BlogApplicationTests {
 	
 	@Resource
 	private ArticleMapper am;
+	
+	@Resource
+	private MailService ms;
 	
 	@Test
 	void contextLoads() {
@@ -43,5 +47,13 @@ class BlogApplicationTests {
 	@Test
 	void test1() {
 		//pageHelper 分页查询
+		ms.sendSimpleMail("1139386771@qq.com", "测试邮件", "测试内容");
+		
+		
+		
+		
+		
+		
+		
 	}
 }
