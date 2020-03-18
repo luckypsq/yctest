@@ -2,6 +2,11 @@ package com.yc.blog.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 public class Article {
     private Integer id;
 
@@ -21,6 +26,8 @@ public class Article {
 
     private String status;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")//set
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//get
     private Date createtime;
 
     private Integer readcnt;
@@ -101,10 +108,12 @@ public class Article {
         this.status = status == null ? null : status.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//get
     public Date getCreatetime() {
         return createtime;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")//set
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }

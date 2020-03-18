@@ -6,6 +6,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class User {
     private Integer id;
@@ -35,6 +39,8 @@ public class User {
 
     private String head;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")//set
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//get
     private Date createtime;
 
     private String status;
@@ -96,11 +102,12 @@ public class User {
     public void setHead(String head) {
         this.head = head == null ? null : head.trim();
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//get
     public Date getCreatetime() {
         return createtime;
     }
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")//set
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }

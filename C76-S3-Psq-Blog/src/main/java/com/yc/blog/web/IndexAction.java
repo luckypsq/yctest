@@ -36,6 +36,7 @@ import com.yc.blog.biz.UserBiz;
 import com.yc.blog.dao.ArticleMapper;
 import com.yc.blog.dao.CategoryMapper;
 import com.yc.blog.dao.FlinkMapper;
+import com.yc.blog.dao.UserMapper;
 import com.yc.blog.vo.Result;
 
 @Controller
@@ -47,6 +48,8 @@ public class IndexAction {
 	private CategoryMapper cm;
 	@Resource
 	private FlinkMapper fm;
+	@Resource
+	private UserMapper um;
 
 	// 程序初始化
 	@ModelAttribute
@@ -180,7 +183,7 @@ public class IndexAction {
 	public String toEdit() {
 		return "article-add";
 	}
-	
+
 	/**
 	 * 保存编辑
 	 */
@@ -189,44 +192,86 @@ public class IndexAction {
 		a.setAuthor(user.getName());
 		a.setCreatetime(new Date());
 		am.insert(a);
-		//响应重定向
+		// 响应重定向
 		return "redirect:article?id=" + a.getId();
 	}
+
 	/**
 	 * 找回密码
 	 */
 	@GetMapping("toforget")
 	public String toforget() {
-		return "toforget";
+		return "forget";
 	}
-	
+
 	/**
-	 *保存验证码
+	 * 保存验证码
 	 */
 	@PostMapping("sendVcode")
 	@ResponseBody
-	public Result sendVcode(String account,HttpSession session) {
+	public Result sendVcode(String account, HttpSession session) {
 		try {
 			String vcode = ubiz.foget(account);
 			session.setAttribute("vcode", vcode);
-			return new Result("验证码发送成功！",1);
+			return new Result("验证码发送成功！", 1);
 		} catch (BaseBizException e) {
 			e.printStackTrace();
-			return new Result(e.getMessage(),0);
-		}catch (RuntimeException e) {
+			return new Result(e.getMessage(), 0);
+		} catch (RuntimeException e) {
 			e.printStackTrace();
-			return new Result("邮件发送失败，请联系客服",0);
+			return new Result("邮件发送失败，请联系客服", 0);
 		}
 	}
-	
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param user
+	 * @param repwd
+	 * @param vcode
+	 * @param sessionVcode
+	 * @param userOld
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("changePwd")
 	@ResponseBody
-	public Result changePwd(User user,String repwd,String vcode
-			,@SessionAttribute("vcode") String sessionVcode) {
-		if(sessionVcode.equals(vcode)) {
-			return new Result("验证码输入正确",0);
-		}else {
-			return new Result("验证码输入错误",0);
+	public Result changePwd(User user, String repwd, String vcode, @SessionAttribute("vcode") String sessionVcode,
+			@SessionAttribute("loginedUser") User userOld, HttpSession session) {
+		if (sessionVcode.equals(vcode)) {
+			if (user.getPwd().equals(repwd)) {
+				userOld.setPwd(user.getPwd());
+				um.updateByPrimaryKey(userOld);
+				session.setAttribute("vcode", "");
+				return new Result("修改成功！！！", 1);
+			} else {
+				return new Result("两次密码不一致！", 101);
+			}
+		} else {
+			return new Result("验证码输入错误！", 103);
 		}
+	}
+
+	/**
+	 * 搜索
+	 */
+	@PostMapping("search")
+	@ResponseBody
+	public Result search(String keyword, @RequestParam(defaultValue = "1") Integer page, Model m) {
+		// 分页
+		Page<Article> pg = PageHelper.startPage(page, 5);
+		// 查询所有
+		ArticleExample ae = new ArticleExample();
+		ae.createCriteria().andKeywordsEqualTo(keyword);
+		ae.setOrderByClause("createtime desc");
+		am.selectByExampleWithBLOBs(ae);
+		m.addAttribute("alist", pg);
+		if(pg.size() > 0) {
+			return new Result("查询成功！",1);
+		}else {
+			return new Result("查询失败！",0);
+		}
+		
+
 	}
 }
