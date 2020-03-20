@@ -1,0 +1,11 @@
+server:
+   port: 8002
+spring:
+   application:
+      name: sc-order
+      
+eureka:
+   client:
+      serviceUrl:
+         #注册服务器
+         defaultZone: http://127.0.0.1:8000/eureka

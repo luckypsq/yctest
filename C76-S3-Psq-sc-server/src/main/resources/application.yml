@@ -1,0 +1,11 @@
+server:
+   port: 8000
+#工程名
+spring:
+   application:
+      name: sc-server
+      
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
