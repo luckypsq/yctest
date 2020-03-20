@@ -9,3 +9,6 @@ eureka:
    client:
       registerWithEureka: false
       fetchRegistry: false
+      serviceUrl:
+         #注册服务器
+         defaultZone: http://127.0.0.1:8000/eureka

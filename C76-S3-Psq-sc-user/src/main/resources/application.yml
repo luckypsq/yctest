@@ -8,7 +8,7 @@ eureka:
    client:
       serviceUrl:
          #注册服务器
-         defaultZone: http://127.0.0.1:8000/eureka
+         defaultZone: http://127.0.0.1:8100/eureka,http://127.0.0.1:8200/eureka
   
 # java 运行参数：--spring.profiles.active=cu1
 #  mvn 运行参数：-Dspring.profiles.active=cu1
@@ -19,10 +19,19 @@ eureka:
 spring:
    profiles: cu1
 server:
-   port: 8005
-
----
+   port: 8100
+eureka:
+   client:
+      serviceUrl:
+         #注册服务器
+         defaultZone: http://127.0.0.1:8000/eureka,http://127.0.0.1:8200/eureka
 spring:
    profiles: cu2
 server:
-   port: 8006
+   port: 8200
+eureka:
+   client:
+      serviceUrl:
+         #注册服务器
+         defaultZone: http://127.0.0.1:8100/eureka,http://127.0.0.1:8000/eureka
+   
