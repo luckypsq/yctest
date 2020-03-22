@@ -1,3 +1,5 @@
+server:
+   port: 80
 
 spring:
    datasource:
@@ -7,14 +9,16 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
+  #实体类的路径
    type-aliases-package: com.yc.ebuy.bean
    configuration:
       map-underscore-to-camel-case: true
-  
+
+# 日志配置
 logging:
    level:
       com:
          yc:
             ebuy:
                dao: debug
-               web: warn
+               web: warn 
