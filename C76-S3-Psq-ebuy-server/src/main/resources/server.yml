@@ -1,8 +1,8 @@
 
-#å·¥ç¨‹å
+#¹¤³ÌÃû
 spring:
    application:
-      name: sc-server
+      name: ebuy-server
 server:
    port: 8000      
 eureka:
@@ -10,7 +10,7 @@ eureka:
       registerWithEureka: false
       fetchRegistry: false
       serviceUrl:
-         #æ³¨å†ŒæœåŠ¡å™¨
+         #×¢²á·şÎñÆ÷
          defaultZone: http://127.0.0.1:8100/eureka,http://127.0.0.1:8200/eureka
  
 ---

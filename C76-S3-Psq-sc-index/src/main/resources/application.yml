@@ -13,3 +13,36 @@ eureka:
 feign:
    hystrix:
       enabled: true
+      
+#zuul网关
+zuul:
+   ignoredServices: '*'
+   routes:
+      #简单路由
+      test1:
+         path: /baidu/**
+         url: http://www.baidu.com
+      # 跳转路由
+      test2:
+         path: /zuser/**
+         url: forward:/user
+       #riboon路由
+      test3:
+         path: /ruser/**
+         serviceId: sc-user 
+         #由于zuul有默认的敏感头设定，所以要忽略默认的敏感头设置，设为空
+         sensitiveHeaders :  
+      sc-user:
+         path: /rruser/**
+         
+      #默认路由
+      legacy:
+         path: /**
+         url: http://www.163.com
+         
+     #去敏感头域字段
+      test4:
+         path: /suser/**
+         serviceId: sc-user
+         sensitiveHeaders :  cookie,set-cookie
+     
