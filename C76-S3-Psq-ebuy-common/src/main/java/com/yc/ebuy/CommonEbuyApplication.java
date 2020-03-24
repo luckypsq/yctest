@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.yc.ebuy")
-public class EbuyCommonApplication {
+public class CommonEbuyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EbuyCommonApplication.class, args);
+		SpringApplication.run(CommonEbuyApplication.class, args);
 	}
 
 }
