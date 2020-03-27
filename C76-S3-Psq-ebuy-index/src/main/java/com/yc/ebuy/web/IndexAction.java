@@ -29,6 +29,7 @@ public class IndexAction {
 		mav.addObject("pclist", eba.getPc());
 		//查询新闻
 		mav.addObject("nlist", eba.getNews());
+		mav.addObject("hplist", eba.getHotP());
 		mav.setViewName("index");
 		return mav;
 	}
