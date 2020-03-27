@@ -1,5 +1,5 @@
 server:
-   port: 80
+   port: 8000
 spring:
    application:
       name: ebuy-index
@@ -25,4 +25,8 @@ logging:
 feign:
    hystrix:
       enabled: true 
-   
+---
+spring:
+   profiles: index-8003
+server:
+   port: 8003    

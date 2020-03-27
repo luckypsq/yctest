@@ -1,0 +1,26 @@
+server:
+   port: 80
+
+spring:
+   application:
+      name: ebuy-zuul
+
+logging:
+   level:
+      com:
+         yc:
+            ebuy:
+               dao: debug
+               web: warn
+
+zuul:
+   routes:
+      ebuy-index:
+         path: /**
+  # 由于 zuul 有默认的敏感头设定,所以要忽略默认的敏感头设置, 必须将敏感头设置为 空
+         sensitiveHeaders: 
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+   ConnectTimeout: 3000
+   ReadTimeout: 60000
