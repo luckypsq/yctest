@@ -1,7 +1,15 @@
 package com.yc.ebuy.bean;
 
-public class EasybuyProductCategory {
-    private Integer id;
+import java.io.Serializable;
+import java.util.List;
+
+public class EasybuyProductCategory implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String name;
 
@@ -34,7 +42,17 @@ public class EasybuyProductCategory {
     public void setParentid(Integer parentid) {
         this.parentid = parentid;
     }
+    /**
+     * 	子类集合
+     */
+    private List<EasybuyProductCategory> children;
+    public List<EasybuyProductCategory> getChildren() {
+		return children;
+	}
 
+	public void setChildren(List<EasybuyProductCategory> children) {
+		this.children = children;
+	}
     public Integer getType() {
         return type;
     }
