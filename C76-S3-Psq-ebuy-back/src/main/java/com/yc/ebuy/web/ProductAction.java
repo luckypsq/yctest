@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
@@ -15,7 +16,7 @@ import com.yc.ebuy.dao.EasybuyProductMapper;
 public class ProductAction {
 
 	@Resource
-	private EasybuyProductMapper pcm;
+	private EasybuyProductMapper pm;
 
 	/**
 	 * 查询所有的商品分类信息
@@ -26,8 +27,12 @@ public class ProductAction {
 		EasybuyProductExample pce = new EasybuyProductExample();
 		pce.setOrderByClause("stock desc");
 		PageHelper.startPage(1, 10);
-		List<EasybuyProduct> list = pcm.selectByExample(pce);
+		List<EasybuyProduct> list = pm.selectByExample(pce);
 		return list;
 	}
 
+	@GetMapping("product")
+	public EasybuyProduct product(@RequestParam("id")int id){
+		return pm.selectByPrimaryKey(id);
+	}
 }
