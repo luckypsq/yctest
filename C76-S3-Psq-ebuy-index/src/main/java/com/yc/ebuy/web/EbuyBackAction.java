@@ -3,8 +3,6 @@ package com.yc.ebuy.web;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.yc.ebuy.bean.EasybuyNews;
 import com.yc.ebuy.bean.EasybuyProduct;
 import com.yc.ebuy.bean.EasybuyProductCategory;
@@ -37,7 +35,7 @@ public class EbuyBackAction implements IEbuyBackAction {
 	}
 
 	@Override
-	public EasybuyProduct product(@RequestParam("id")int id) {
+	public EasybuyProduct product(int id) {
 		return null;
 	}
 }

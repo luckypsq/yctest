@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yc.ebuy.bean.EasybuyNews;
 import com.yc.ebuy.bean.EasybuyProduct;
@@ -23,5 +22,5 @@ public interface IEbuyBackAction {
 	@GetMapping("getHotP")
 	public List<EasybuyProduct> getHotP();
 	@GetMapping("product")
-	public EasybuyProduct product(@RequestParam("id")int id);
+	public EasybuyProduct product(int id);
 }
